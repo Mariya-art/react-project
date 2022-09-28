@@ -24,3 +24,8 @@
 .text {
   color: white;
 }
+
+.nav {
+  text-decoration: none;
+  margin-right: 20px;
+}
