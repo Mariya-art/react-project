@@ -41,15 +41,15 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes>
-        <Route path={'/'} element={<Layout pages={pages}/>}>
-          <Route index element={<Home />}/>
-          <Route path={'/chats'} element={<Chats />}/>
-          <Route path={'/profile'} element={<Profile />}/>
-          <Route path={'*'} element={<NotFoundPage />}/>
-          <Route path={'/chats/:id'} element={<Chat />}/>
-        </Route>
-      </Routes>
+          <Routes>
+            <Route path={'/'} element={<Layout pages={pages}/>}>
+              <Route index element={<Home />}/>
+              <Route path={'/chats'} element={<Chats />}/>
+              <Route path={'/profile'} element={<Profile />}/>
+              <Route path={'*'} element={<NotFoundPage />}/>
+              <Route path={'/chats/:id'} element={<Chat />}/>
+            </Route>
+          </Routes>
     </ThemeProvider>
   );
 }
