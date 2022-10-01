@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
 import { Business, Diversity1, Diversity3, Group } from '@mui/icons-material';
-import Chat from './Chat';
 import { Link } from 'react-router-dom';
 
 function Chats() {
@@ -70,9 +69,6 @@ function Chats() {
                         )}
                     )}
                     </List>
-                </Grid>
-                <Grid item xs={10}>
-                    <Chat />
                 </Grid>
             </Grid>
         </div>

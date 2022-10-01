@@ -6,8 +6,58 @@ const Chat = () => {
     const { id } = useParams();
     const [message, setMessage] = useState('');
     const [author, setAuthor] = useState('');
-    const [messageList, setMessageList] = useState([]);
+    const [messageList, setMessageList] = useState([
+        {
+            id: 1,
+            text: 'Привет, Дима', 
+            author: 'Папа',
+            chatId: 1,
+        },
+        {
+            id: 2,
+            text: 'Совещание в 11:00', 
+            author: 'Boss',
+            chatId: 2,
+        },
+        {
+            id: 3,
+            text: 'Привет, папа', 
+            author: 'Дима',
+            chatId: 1,
+        },
+        {
+            id: 4,
+            text: 'Жду всех сегодня в гости', 
+            author: 'Алиса',
+            chatId: 3,
+        },
+        {
+            id: 5,
+            text: 'Окей, босс', 
+            author: 'Николай',
+            chatId: 2,
+        },
+        {
+            id: 6,
+            text: 'Отлично! Я буду к 19:00', 
+            author: 'Максим',
+            chatId: 3,
+        },
+        {
+            id: 7,
+            text: 'А я немного опоздаю', 
+            author: 'Аня',
+            chatId: 3,
+        },
+    ]);
     
+    const messages = messageList.filter((item) => {
+        if (!id) {
+            return true;
+        }
+        return item.chatId === Number(id);
+    });
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setMessageList(prevState => [...prevState, {
@@ -66,7 +116,7 @@ const Chat = () => {
                 </Grid>
             </form>
             <Grid item xs={8}>
-                {messageList.map((item) => {
+                {messages.map((item) => {
                     return(
                         <div key={item.id}>
                         <p className='author'>{item.author}: <span className='text'>{item.text}</span></p>
