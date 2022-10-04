@@ -1,31 +1,17 @@
 import React, { useState } from 'react';
 import { Grid, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
-import { Business, Diversity1, Diversity3, Group } from '@mui/icons-material';
+import { Group } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { chatsSelector } from '../redux/chatsReducer/chatsSelector';
 
 function Chats() {
+    const chats = useSelector(chatsSelector);
+    const dispatch = useDispatch();
     const [title, setTitle] = useState('');
-    const [chatList, setChatsList] = useState([
-        {
-            id: 1,
-            title: 'Семья',
-            icon: <Diversity1 />,
-        },
-        {
-            id: 2,
-            title: 'Работа',
-            icon: <Business />,
-        },
-        {
-            id: 3,
-            title: 'Друзья',
-            icon: <Diversity3 />,
-        },
-    ]);
 
     const handleDelete = (id) => {
-        const filteredChats = chatList.filter((chat) => chat.id !== id);
-        setChatsList(filteredChats);
+        dispatch({ type: 'delete', payload: id });
     };
 
     const handleAdd = () => {
@@ -34,7 +20,7 @@ function Chats() {
             title: title,
             icon: <Group />,
         };
-        setChatsList(prevState => [...prevState, newChat]);
+        dispatch({ type: 'add', payload: newChat });
     };
 
     return (
@@ -49,7 +35,7 @@ function Chats() {
                     component="nav"
                     subheader={<ListSubheader component="div">Список чатов</ListSubheader>}
                     >
-                    {chatList.map((item) => { 
+                    {chats.map((item) => { 
                         return(
                             <Grid key={item.id} container spacing={1}>
                                 <Grid item>
