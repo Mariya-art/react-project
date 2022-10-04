@@ -1,89 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Grid, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, Grid, ListItemButton, TextField } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { messagesSelector } from '../redux/messagesReducer/messagesSelector';
 
 const Chat = () => {
+    const messages = useSelector(messagesSelector);
+    const dispatch = useDispatch();
     const { id } = useParams();
     const [message, setMessage] = useState('');
     const [author, setAuthor] = useState('');
-    const [messageList, setMessageList] = useState([
-        {
-            id: 1,
-            text: 'Привет, Дима', 
-            author: 'Папа',
-            chatId: 1,
-        },
-        {
-            id: 2,
-            text: 'Совещание в 11:00', 
-            author: 'Boss',
-            chatId: 2,
-        },
-        {
-            id: 3,
-            text: 'Привет, папа', 
-            author: 'Дима',
-            chatId: 1,
-        },
-        {
-            id: 4,
-            text: 'Жду всех сегодня в гости', 
-            author: 'Алиса',
-            chatId: 3,
-        },
-        {
-            id: 5,
-            text: 'Окей, босс', 
-            author: 'Николай',
-            chatId: 2,
-        },
-        {
-            id: 6,
-            text: 'Отлично! Я буду к 19:00', 
-            author: 'Максим',
-            chatId: 3,
-        },
-        {
-            id: 7,
-            text: 'А я немного опоздаю', 
-            author: 'Аня',
-            chatId: 3,
-        },
-    ]);
-    
-    const messages = messageList.filter((item) => {
+
+    const chatMessages = messages.filter((item) => {
         if (!id) {
             return true;
         }
         return item.chatId === Number(id);
     });
 
+    const handleDelete = (id) => {
+        dispatch({ type: 'deleteMessage', payload: id });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        setMessageList(prevState => [...prevState, {
-            id: prevState.length + 1, 
-            text: message, 
+        const newMessage = {
+            id: Date.now(),
+            text: message,
             author: author,
-        }]);
+            chatId: Number(id),
+        };
+        dispatch({ type: 'addMessage', payload: newMessage });
         setAuthor('');
         setMessage('');
-    }
-    
-    useEffect(() => { 
-        setTimeout(() => {
-            botAnswer();
-        }, 1000);
-    }, [messageList])
-
-    function botAnswer() {
-        let lastMessage = messageList[messageList.length - 1];
-        if(lastMessage && lastMessage.author && lastMessage.author !== 'Робот') {
-            setMessageList(prevState => [...prevState, {
-                id: prevState.length + 1, 
-                text: 'Привет, ' + lastMessage.author, 
-                author: 'Робот',
-            }]);
-        }
     }
 
     return (
@@ -116,11 +65,16 @@ const Chat = () => {
                 </Grid>
             </form>
             <Grid item xs={8}>
-                {messages.map((item) => {
+                {chatMessages.map((item) => {
                     return(
-                        <div key={item.id}>
-                        <p className='author'>{item.author}: <span className='text'>{item.text}</span></p>
-                        </div>
+                        <Grid key={item.id} container spacing={0}>
+                            <Grid key={item.id} item>
+                                <p className='author'>{item.author}: <span className='text'>{item.text}</span></p>
+                            </Grid>
+                            <Grid item>
+                                <ListItemButton onClick={() => handleDelete(item.id)} sx={{color: '#f50057', pt: 2}}>X</ListItemButton>
+                            </Grid>
+                        </Grid>
                     )}
                 )}
             </Grid>
