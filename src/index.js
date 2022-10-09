@@ -6,17 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { DarkThemeProvider } from './context';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { store,persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <DarkThemeProvider>
-                <App />
-            </DarkThemeProvider>
-        </BrowserRouter>
+        <PersistGate persistor={persistor}>
+            <BrowserRouter>
+                <DarkThemeProvider>
+                    <App />
+                </DarkThemeProvider>
+            </BrowserRouter>
+        </PersistGate>
     </Provider>
 );
 
