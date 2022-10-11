@@ -2,12 +2,13 @@ import '../App.css';
 import React, { useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Route, Routes } from 'react-router-dom';
-import Chats from '../pages/Chats';
+import ChatsContainer from '../pages/ChatsContainer';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Layout from './Layout';
 import NotFoundPage from '../pages/NotFoundPage';
-import Chat from '../pages/Chat';
+import ChatContainer from '../pages/ChatContainer';
+import Posts from '../pages/Posts';
 
 const theme = createTheme({
   palette: {
@@ -34,6 +35,11 @@ function App() {
     },
     {
       id: 3,
+      title: 'POSTS',
+      url: '/posts',
+    },
+    {
+      id: 4,
       title: 'PROFILE',
       url: '/profile',
     },
@@ -44,10 +50,11 @@ function App() {
           <Routes>
             <Route path={'/'} element={<Layout pages={pages}/>}>
               <Route index element={<Home />}/>
-              <Route path={'/chats'} element={<Chats />}/>
+              <Route path={'/chats'} element={<ChatsContainer />}/>
+              <Route path={'/posts'} element={<Posts />}/>
               <Route path={'/profile'} element={<Profile />}/>
               <Route path={'*'} element={<NotFoundPage />}/>
-              <Route path={'/chats/:id'} element={<Chat />}/>
+              <Route path={'/chats/:id'} element={<ChatContainer />}/>
             </Route>
           </Routes>
     </ThemeProvider>
