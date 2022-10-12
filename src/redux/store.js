@@ -3,6 +3,7 @@ import { chatsReducer } from "./chatsReducer/chatsReducer";
 import { postsReducer } from "./postsReducer/postsReducer";
 import { countReducer } from "./countReduser/countReducer";
 import { messagesReducer } from "./messagesReducer/messagesReducer";
+import { usersReducer } from "./usersReducer/usersReducer";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
@@ -42,6 +43,7 @@ const reducer = combineReducers({
     posts: postsReducer,
     messages: messagesReducer,
     count: countReducer,
+    users: usersReducer,
 });
 
 const persistedReducer = persistReducer(config, reducer);

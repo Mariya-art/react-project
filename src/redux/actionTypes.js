@@ -1,1 +1,7 @@
 export const GET_POSTS = 'GET_POSTS';
+export const GET_POSTS_LOADING = 'GET_POSTS_LOADING';
+export const GET_POSTS_ERROR = 'GET_POSTS_ERROR';
+
+export const GET_USERS = 'GET_POSTS';
+export const GET_USERS_LOADING = 'GET_POSTS_LOADING';
+export const GET_USERS_ERROR = 'GET_POSTS_ERROR';
