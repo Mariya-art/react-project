@@ -9,6 +9,7 @@ const CustomLink = ({ to, children }) => {
     );
 
     const match = useMatch(to);
+    
     return (
         <Link to={to} style={{ color: match ? '#1de9b6' : 'white'}} className={classes}>
             {children}

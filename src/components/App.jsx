@@ -10,6 +10,9 @@ import NotFoundPage from '../pages/NotFoundPage';
 import ChatContainer from '../pages/ChatContainer';
 import Posts from '../pages/Posts';
 import Users from '../pages/Users';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import Logout from '../pages/Logout';
 
 const theme = createTheme({
   palette: {
@@ -49,6 +52,21 @@ function App() {
       title: 'PROFILE',
       url: '/profile',
     },
+    {
+      id: 6,
+      title: 'Регистрация',
+      url: '/register',
+    },
+    {
+      id: 7,
+      title: 'Вход',
+      url: '/login',
+    },
+    {
+      id: 8,
+      title: 'Выход',
+      url: '/logout',
+    },
   ]);
 
   return (
@@ -60,6 +78,9 @@ function App() {
               <Route path={'/posts'} element={<Posts />}/>
               <Route path={'/users'} element={<Users />}/>
               <Route path={'/profile'} element={<Profile />}/>
+              <Route path={'/register'} element={<Register />}/>
+              <Route path={'/login'} element={<Login />}/>
+              <Route path={'/logout'} element={<Logout />}/>
               <Route path={'*'} element={<NotFoundPage />}/>
               <Route path={'/chats/:id'} element={<ChatContainer />}/>
             </Route>
