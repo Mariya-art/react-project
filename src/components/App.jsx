@@ -2,17 +2,18 @@ import '../App.css';
 import React, { useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Route, Routes } from 'react-router-dom';
+import ChatContainer from '../pages/ChatContainer';
 import ChatsContainer from '../pages/ChatsContainer';
+import Contacts from '../pages/Contacts';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import Layout from './Layout';
-import NotFoundPage from '../pages/NotFoundPage';
-import ChatContainer from '../pages/ChatContainer';
-import Posts from '../pages/Posts';
-import Users from '../pages/Users';
 import Login from '../pages/Login';
+import NotFoundPage from '../pages/NotFoundPage';
+import Posts from '../pages/Posts';
 import Register from '../pages/Register';
-import Logout from '../pages/Logout';
+import Users from '../pages/Users';
+import ProtectedRoutes from './ProtectedRoutes';
 
 const theme = createTheme({
   palette: {
@@ -49,23 +50,13 @@ function App() {
     },
     {
       id: 5,
-      title: 'PROFILE',
-      url: '/profile',
+      title: 'CONTAСTS',
+      url: '/contacts',
     },
     {
       id: 6,
-      title: 'Регистрация',
-      url: '/register',
-    },
-    {
-      id: 7,
-      title: 'Вход',
-      url: '/login',
-    },
-    {
-      id: 8,
-      title: 'Выход',
-      url: '/logout',
+      title: 'PROFILE',
+      url: '/profile',
     },
   ]);
 
@@ -77,10 +68,12 @@ function App() {
               <Route path={'/chats'} element={<ChatsContainer />}/>
               <Route path={'/posts'} element={<Posts />}/>
               <Route path={'/users'} element={<Users />}/>
+              <Route path={'/contacts'} element={<ProtectedRoutes>
+                  <Contacts />
+                </ProtectedRoutes>}/>
               <Route path={'/profile'} element={<Profile />}/>
               <Route path={'/register'} element={<Register />}/>
               <Route path={'/login'} element={<Login />}/>
-              <Route path={'/logout'} element={<Logout />}/>
               <Route path={'*'} element={<NotFoundPage />}/>
               <Route path={'/chats/:id'} element={<ChatContainer />}/>
             </Route>

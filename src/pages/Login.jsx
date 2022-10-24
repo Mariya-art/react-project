@@ -9,19 +9,19 @@ const Login = () => {
     const navigate = useNavigate('');
     const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
         if (!email || !password) {
             return;
         }
         dispatch(loginInitiate(email, password));
-        navigate('/logout');
+        navigate('/chats');
     }
 
     return (
         <div>
             <h2>Вход</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleLogin}>
                 <input value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <input value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <button type='submit'>Войти</button>

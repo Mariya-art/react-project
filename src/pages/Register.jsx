@@ -17,7 +17,7 @@ const Register = () => {
             return;
         }
         dispatch(registerInitiate(email, password, displayName));
-        navigate('/logout');
+        navigate('/login');
     }
 
     return (
